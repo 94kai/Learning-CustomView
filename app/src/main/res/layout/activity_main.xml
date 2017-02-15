@@ -9,12 +9,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.xk.customview.MainActivity">
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:onClick="requestLayout"/>
-   <com.xk.customview.custom.MCustom
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:id="@+id/mc"/>
+
+      <com.xk.customview.custom.MCustom
+          android:id="@+id/mc"
+          android:layout_width="200dp"
+          android:layout_height="200dp" />
+
 </RelativeLayout>
