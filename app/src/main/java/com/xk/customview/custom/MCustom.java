@@ -4,6 +4,7 @@ package com.xk.customview.custom;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Picture;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -43,29 +44,29 @@ public class MCustom extends View {
             mPaint.setAntiAlias(true);
         }
 
-        @Override
-        protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-            super.onSizeChanged(w, h, oldw, oldh);
-            mWidth = w;
-            mHeight = h;
-        }
 
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            if (null == mData)
-                return;
-            float currentStartAngle = mStartAngle;                    // 当前起始角度
-//            canvas.translate(mWidth / 2, mHeight / 2);                // 将画布坐标原点移动到中心位置
-            float r = (float) (Math.min(mWidth, mHeight) / 2 * 0.8);  // 饼状图半径
-            RectF rect = new RectF(0, 0, 2*r, 2*r);                     // 饼状图绘制区域
-
-            for (int i = 0; i < mData.size(); i++) {
-                PieData pie = mData.get(i);
-                mPaint.setColor(pie.getColor());
-                canvas.drawArc(rect, currentStartAngle, pie.getAngle(), true, mPaint);
-                currentStartAngle += pie.getAngle();
+            float r = 100;  // 饼状图半径
+            if (pic != null) {
+                canvas.drawPicture(pic,new RectF(0,0,100,30));
             }
+            canvas.save();
+            canvas.translate(100,100);                // 将画布坐标原点移动到中心位置
+            RectF rect = new RectF(0, 0, r, r);                     // 饼状图绘制区域
+
+            canvas.drawCircle(0,0,10,mPaint);
+            canvas.restore();
+
+            canvas.drawRect(rect,mPaint);
+
+//            for (int i = 0; i < mData.size(); i++) {
+//                PieData pie = mData.get(i);
+//                mPaint.setColor(pie.getColor());
+//                canvas.drawArc(rect, currentStartAngle, pie.getAngle(), true, mPaint);
+//                currentStartAngle += pie.getAngle();
+//            }
 
         }
 
@@ -111,4 +112,9 @@ public class MCustom extends View {
                 Log.i("angle", "" + pie.getAngle());
             }
         }
+    private Picture pic;
+    public void setPic(Picture pic){
+        this.pic=pic;
+        invalidate();
+    }
 }

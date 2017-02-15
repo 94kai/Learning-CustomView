@@ -1,5 +1,8 @@
 package com.xk.customview;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Picture;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,5 +29,17 @@ public class MainActivity extends AppCompatActivity {
         pieDatas.add(a3);
         pieDatas.add(a4);
         viewById.setData(pieDatas);
+
+        Picture picture = new Picture();
+        Canvas canvas = picture.beginRecording(100, 100);
+
+        canvas.translate(100,100);
+        Paint paint = new Paint();
+        paint.setColor(0xff00ff00);
+        canvas.drawCircle(50,50,50,paint);
+        picture.endRecording();
+        viewById.setPic(picture);
+
+
     }
 }
