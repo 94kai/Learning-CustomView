@@ -1,45 +1,43 @@
 package com.xk.customview;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Picture;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.view.KeyEvent;
 
-import com.xk.customview.custom.MCustom;
-import com.xk.customview.custom.PieData;
+import com.xk.customview.custom.CustomProgressBar;
 
-import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String TAG = "MainActivity";
+    private CustomProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MCustom viewById = (MCustom) findViewById(R.id.mc);
-        PieData a1 = new PieData("x1x", 10);
-        PieData a2 = new PieData("x2x", 20);
-        PieData a3 = new PieData("x3x", 130);
-        PieData a4 = new PieData("x4x", 40);
-        ArrayList<PieData> pieDatas = new ArrayList<>();
-        pieDatas.add(a1);
-        pieDatas.add(a2);
-        pieDatas.add(a3);
-        pieDatas.add(a4);
-        viewById.setData(pieDatas);
-
-        Picture picture = new Picture();
-        Canvas canvas = picture.beginRecording(100, 100);
-
-        canvas.translate(100,100);
-        Paint paint = new Paint();
-        paint.setColor(0xff00ff00);
-        canvas.drawCircle(50,50,50,paint);
-        picture.endRecording();
-        viewById.setPic(picture);
 
 
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                if (progressBar.getCurrentProgress() == 0) {
+                    return true;
+                }
+                progressBar.setCurrentProgress(progressBar.getCurrentProgress()-1);
+                break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                if (progressBar.getCurrentProgress() == 100) {
+                    return true;
+                }
+                progressBar.setCurrentProgress(progressBar.getCurrentProgress()+1);
+                break;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }
