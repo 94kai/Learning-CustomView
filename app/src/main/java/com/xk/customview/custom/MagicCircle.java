@@ -12,10 +12,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-import static android.R.attr.centerX;
-import static android.R.attr.centerY;
-import static android.R.attr.logo;
-import static android.R.attr.offset;
 
 /**
  * Created by xuekai on 2017/2/17.
@@ -127,19 +123,19 @@ public class MagicCircle extends View {
         mPath.cubicTo(p4.bottom.x, p4.bottom.y, p1.left.x, p1.left.y, p1.x, p1.y);
 
         canvas.drawPath(mPath, mFillCirclePaint);
-
-        canvas.drawText("p1-left", p1.left.x, p1.left.y, textPaint);
-        canvas.drawText("p1", p1.x, p1.y, textPaint);
-        canvas.drawText("p1-right", p1.right.x, p1.right.y, textPaint);
-        canvas.drawText("p3-left", p3.left.x, p3.left.y, textPaint);
-        canvas.drawText("p3", p3.x, p3.y, textPaint);
-        canvas.drawText("p3-right", p3.right.x, p3.right.y, textPaint);
-        canvas.drawText("p2-top", p2.top.x, p2.top.y, textPaint);
-        canvas.drawText("p2", p2.x, p2.y, textPaint);
-        canvas.drawText("p4-top", p4.top.x, p4.top.y, textPaint);
-        canvas.drawText("p2-bottom", p2.bottom.x, p2.bottom.y, textPaint);
-        canvas.drawText("p4-bottom", p4.bottom.x, p4.bottom.y, textPaint);
-        canvas.drawText("p4", p4.x, p4.y, textPaint);
+//
+//        canvas.drawText("p1-left", p1.left.x, p1.left.y, textPaint);
+//        canvas.drawText("p1", p1.x, p1.y, textPaint);
+//        canvas.drawText("p1-right", p1.right.x, p1.right.y, textPaint);
+//        canvas.drawText("p3-left", p3.left.x, p3.left.y, textPaint);
+//        canvas.drawText("p3", p3.x, p3.y, textPaint);
+//        canvas.drawText("p3-right", p3.right.x, p3.right.y, textPaint);
+//        canvas.drawText("p2-top", p2.top.x, p2.top.y, textPaint);
+//        canvas.drawText("p2", p2.x, p2.y, textPaint);
+//        canvas.drawText("p4-top", p4.top.x, p4.top.y, textPaint);
+//        canvas.drawText("p2-bottom", p2.bottom.x, p2.bottom.y, textPaint);
+//        canvas.drawText("p4-bottom", p4.bottom.x, p4.bottom.y, textPaint);
+//        canvas.drawText("p4", p4.x, p4.y, textPaint);
 
 
     }
@@ -184,8 +180,6 @@ public class MagicCircle extends View {
         p3.adjustAllX(stretchDistance / 2 * time);
         p2.adjustY(cDistance * time);
         p4.adjustY(cDistance * time);
-        Log.e("MagicCircle","model2"+stretchDistance / 2 * time);
-        Log.e("MagicCircle","model2"+p1.x);
     }
 
     /**
@@ -301,7 +295,7 @@ public class MagicCircle extends View {
         mPath.reset();
         mInterpolatedTime = 0;
         MoveAnimation move = new MoveAnimation();
-        move.setDuration(20000);
+        move.setDuration(1000);
         move.setInterpolator(new AccelerateDecelerateInterpolator());
         //move.setRepeatCount(Animation.INFINITE);
         //move.setRepeatMode(Animation.REVERSE);

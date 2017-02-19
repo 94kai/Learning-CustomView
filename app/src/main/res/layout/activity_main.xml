@@ -12,8 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.xk.customview.MainActivity">
 
-    <com.xk.customview.custom.MagicCircle
-        android:id="@+id/magic"
+    <com.xk.customview.custom.QQRemindView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>
