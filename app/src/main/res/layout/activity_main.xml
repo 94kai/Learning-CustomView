@@ -12,9 +12,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.xk.customview.MainActivity">
 
-    <com.xk.customview.custom.PathDemoView
-        android:background="#00f"
-        android:layout_margin="100dp"
+    <com.xk.customview.custom.MagicCircle
+        android:id="@+id/magic"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>

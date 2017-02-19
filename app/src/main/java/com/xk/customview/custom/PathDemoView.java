@@ -27,7 +27,9 @@ import static android.R.attr.bitmap;
 import static android.R.attr.direction;
 import static android.R.attr.path;
 
-
+/**
+ * 游戏属性图
+ */
 public class PathDemoView extends View {
     private static final String TAG = "PathDemoView";
     private Paint mPaint;
