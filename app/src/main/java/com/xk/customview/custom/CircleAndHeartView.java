@@ -1,5 +1,6 @@
 package com.xk.customview.custom;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,10 +8,13 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 /**
+ * 从圆到心
+ * 来自https://github.com/GcsSloop/AndroidNote/blob/master/CustomView/Advance/%5B06%5DPath_Bezier.md
  * Created by xuekai on 2017/2/17.
  */
 
@@ -31,10 +35,14 @@ public class CircleAndHeartView extends View {
     private int width;
     private int height;
     private Paint paint;
+    private int raduis=200;
+    //datac的偏移量(变心的时候)
+    private float dcOffset;
+    private float daOffset;
 
     private final float C = 0.551915024494f;     // 一个常量，用来计算绘制圆形贝塞尔曲线控制点的位置
 
-    private float mDifference = 100 * C;        // 圆形的控制点与数据点的差值
+    private float mDifference = raduis * C;        // 圆形的控制点与数据点的差值
 
 
     public CircleAndHeartView(Context context) {
@@ -68,22 +76,20 @@ public class CircleAndHeartView extends View {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        dataA.set(0, 140);
-        dataB.set(100, 0);
-        dataC.set(0, -50);
-        dataD.set(-100, 0);
+        dataB.set(raduis, 0);
+        dataD.set(-raduis, 0);
 
 
-        controlA.set(0 + mDifference, 100);
-        controlB.set(90, 0 + mDifference);
-        controlC.set(100, 0 - mDifference);
-        controlD.set(0 + mDifference, -100);
+        controlA.set(0 + mDifference, raduis);
+        controlB.set(raduis, 0 + mDifference);
+        controlC.set(raduis, 0 - mDifference);
+        controlD.set(0 + mDifference, -raduis);
 
 
-        controlE.set(0 - mDifference, -100);
-        controlF.set(-100, 0 - mDifference);
-        controlG.set(-90, 0 + mDifference);
-        controlH.set(0 - mDifference, 100);
+        controlE.set(0 - mDifference, -raduis);
+        controlF.set(-raduis, 0 - mDifference);
+        controlG.set(-raduis, 0 + mDifference);
+        controlH.set(0 - mDifference, raduis);
 
 
         width = w;
@@ -92,6 +98,10 @@ public class CircleAndHeartView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        dataC.set(0, -raduis+dcOffset);
+        dataA.set(0, raduis+daOffset);
+
+
         drawCoordinate(canvas);
         canvas.save();
         canvas.translate(width / 2, height / 2);
@@ -136,25 +146,21 @@ public class CircleAndHeartView extends View {
         canvas.restore();
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
-                controlA.set(event.getX() - width / 2, event.getY() - height / 2);
-//                if (event.getX()<width/2) {
-//                    controlA.set(event.getX()-width/2,event.getY()-height/2);
-//
-//                }else{
-//                    controlB.set(event.getX()-width/2,event.getY()-height/2);
-//
-//                }
-                postInvalidate();
-                break;
-        }
-        return true;
-    }
+   public void startAnimation(){
+       ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
+       valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+           @Override
+           public void onAnimationUpdate(ValueAnimator animation) {
+               float value = (float) animation.getAnimatedValue();
+               //这里自己调整，通过调整各个data点和control点，可以使心更好看，只是为了学习，所以我就随便动了两个点
+               dcOffset=value*raduis/2;
+               daOffset=value*raduis/2;
+               invalidate();
+            }
+       });
+       valueAnimator.setDuration(2000);
+       valueAnimator.start();
+   }
 
 
 }

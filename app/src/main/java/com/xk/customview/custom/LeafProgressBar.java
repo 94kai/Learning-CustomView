@@ -5,11 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -20,13 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static android.R.attr.y;
-
 /**
+ * 模仿http://blog.csdn.net/tianjian4592/article/details/44538605
+ * 实现方法不同，原来的版本叶子是随机的，这个版本叶子是由进度确定的，风扇速度由进度变化来决定
  * Created by xuekai on 2017/2/16.
  */
 
-public class CustomProgressBar extends View {
+public class LeafProgressBar extends View {
 
     private Random random;
     private static final String TAG = "CustomProgressBar";
@@ -69,17 +65,20 @@ public class CustomProgressBar extends View {
 
     private float fengShanSpeed = FENGSHANSPEED_MIN;
     private int fengShanRoate = 0;
+    //两个叶子之间的最小距离
+    private int distance=50;
 
-    public CustomProgressBar(Context context) {
+    public LeafProgressBar(Context context) {
         this(context, null);
     }
 
-    public CustomProgressBar(Context context, AttributeSet attrs) {
+    public LeafProgressBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
     private void init() {
+        setBackgroundColor(0xffffa800);
         random = new Random();
         frameBitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.leaf_kuang)).getBitmap();
         leaf = ((BitmapDrawable) getResources().getDrawable(R.mipmap.leaf)).getBitmap();
@@ -212,7 +211,7 @@ public class CustomProgressBar extends View {
         this.currentProgress = currentProgress;
         if (leafs.size() > 0) {
             Leaf lastLeaf = leafs.get(leafs.size() - 1);
-            if (frameWidth / 2 - RIGHT_MARGIN - lastLeaf.x > 20) {
+            if (frameWidth / 2 - RIGHT_MARGIN - lastLeaf.x > distance) {
                 Leaf leaf = new Leaf();
                 leafs.add(leaf);
             }
@@ -245,6 +244,7 @@ public class CustomProgressBar extends View {
             fengShanSpeed-=0.1f;
         }
     }
+
 
     class Leaf {
         public Leaf() {

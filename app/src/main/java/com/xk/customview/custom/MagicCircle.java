@@ -14,6 +14,7 @@ import android.view.animation.Transformation;
 
 
 /**
+ * 来自http://www.jianshu.com/p/791d3a791ec2
  * Created by xuekai on 2017/2/17.
  * 弹性球 完了看
  */
@@ -123,19 +124,19 @@ public class MagicCircle extends View {
         mPath.cubicTo(p4.bottom.x, p4.bottom.y, p1.left.x, p1.left.y, p1.x, p1.y);
 
         canvas.drawPath(mPath, mFillCirclePaint);
-//
-//        canvas.drawText("p1-left", p1.left.x, p1.left.y, textPaint);
-//        canvas.drawText("p1", p1.x, p1.y, textPaint);
-//        canvas.drawText("p1-right", p1.right.x, p1.right.y, textPaint);
-//        canvas.drawText("p3-left", p3.left.x, p3.left.y, textPaint);
-//        canvas.drawText("p3", p3.x, p3.y, textPaint);
-//        canvas.drawText("p3-right", p3.right.x, p3.right.y, textPaint);
-//        canvas.drawText("p2-top", p2.top.x, p2.top.y, textPaint);
-//        canvas.drawText("p2", p2.x, p2.y, textPaint);
-//        canvas.drawText("p4-top", p4.top.x, p4.top.y, textPaint);
-//        canvas.drawText("p2-bottom", p2.bottom.x, p2.bottom.y, textPaint);
-//        canvas.drawText("p4-bottom", p4.bottom.x, p4.bottom.y, textPaint);
-//        canvas.drawText("p4", p4.x, p4.y, textPaint);
+
+        canvas.drawText("p1-left", p1.left.x, p1.left.y, textPaint);
+        canvas.drawText("p1", p1.x, p1.y, textPaint);
+        canvas.drawText("p1-right", p1.right.x, p1.right.y, textPaint);
+        canvas.drawText("p3-left", p3.left.x, p3.left.y, textPaint);
+        canvas.drawText("p3", p3.x, p3.y, textPaint);
+        canvas.drawText("p3-right", p3.right.x, p3.right.y, textPaint);
+        canvas.drawText("p2-top", p2.top.x, p2.top.y, textPaint);
+        canvas.drawText("p2", p2.x, p2.y, textPaint);
+        canvas.drawText("p4-top", p4.top.x, p4.top.y, textPaint);
+        canvas.drawText("p2-bottom", p2.bottom.x, p2.bottom.y, textPaint);
+        canvas.drawText("p4-bottom", p4.bottom.x, p4.bottom.y, textPaint);
+        canvas.drawText("p4", p4.x, p4.y, textPaint);
 
 
     }
