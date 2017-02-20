@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] datas = {"0.Demo", "1.叶子进度条", "2.弹性球", "3.蜘蛛网（游戏属性图）", "4.qq未读消息气泡", "5.刻度表", "6.圆->心"};
+        String[] datas = {"0.Demo", "1.叶子进度条", "2.弹性球", "3.蜘蛛网（游戏属性图）", "4.qq未读消息气泡", "5.刻度表", "6.圆->心"
+                , "旋转箭头"};
 
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, datas));
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
                     case 6:
                         startActivity(new Intent(MainActivity.this, CircleAndHeartActivity.class));
+                        break;
+                    case 7:
+                        startActivity(new Intent(MainActivity.this, RoationActivity.class));
                         break;
                 }
             }
