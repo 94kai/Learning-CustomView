@@ -1,47 +1,28 @@
 package com.xk.customview.custom;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.xk.customview.R;
-
-import static android.R.attr.bitmap;
-import static android.R.attr.direction;
-import static android.R.attr.path;
 
 /**
  * 游戏属性图
  */
-public class PathDemoView extends View {
+public class SpiderView extends View {
     private static final String TAG = "PathDemoView";
     private Paint mPaint;
     private int scale = 3;
     //辅助计算文字位置
     private float v;
 
-    public PathDemoView(Context context) {
+    public SpiderView(Context context) {
         this(context, null);
     }
 
-    public PathDemoView(Context context, AttributeSet attrs) {
+    public SpiderView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
