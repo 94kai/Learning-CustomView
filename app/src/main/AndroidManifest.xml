@@ -19,6 +19,7 @@
         <activity android:name=".activity.LeafProgressActivity" />
         <activity android:name=".activity.MagicCircleActivity" />
         <activity android:name=".activity.SpiderActivity" />
+        <activity android:name=".activity.InstrumentActivity" />
         <activity android:name=".activity.QQBubbleActivity">
         </activity>
     </application>

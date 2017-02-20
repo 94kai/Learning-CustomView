@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.xk.customview.R;
+import com.xk.customview.custom.InstrumentView;
 import com.xk.customview.custom.MagicCircle;
 import com.xk.customview.custom.SpiderView;
 
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] datas = {"圆->心","叶子进度条","弹性球","蜘蛛网（游戏属性图）","qq未读消息气泡"};
+        String[] datas = {"0.圆->心", "1.叶子进度条", "2.弹性球", "3.蜘蛛网（游戏属性图）", "4.qq未读消息气泡", "5.刻度表"};
 
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, datas));
@@ -30,25 +31,27 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        startActivity(new Intent(MainActivity.this,CircleAndHeartActivity.class));
+                        startActivity(new Intent(MainActivity.this, CircleAndHeartActivity.class));
                         break;
                     case 1:
-                        startActivity(new Intent(MainActivity.this,LeafProgressActivity.class));
+                        startActivity(new Intent(MainActivity.this, LeafProgressActivity.class));
 
                         break;
                     case 2:
-                        startActivity(new Intent(MainActivity.this,MagicCircleActivity.class));
+                        startActivity(new Intent(MainActivity.this, MagicCircleActivity.class));
 
                         break;
                     case 3:
-                        startActivity(new Intent(MainActivity.this,SpiderActivity.class));
+                        startActivity(new Intent(MainActivity.this, SpiderActivity.class));
 
                         break;
                     case 4:
-                        startActivity(new Intent(MainActivity.this,QQBubbleActivity.class));
+                        startActivity(new Intent(MainActivity.this, QQBubbleActivity.class));
 
                         break;
                     case 5:
+                        startActivity(new Intent(MainActivity.this, InstrumentActivity.class));
+
                         break;
                 }
             }

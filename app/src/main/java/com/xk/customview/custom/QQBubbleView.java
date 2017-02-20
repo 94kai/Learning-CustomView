@@ -113,6 +113,9 @@ public class QQBubbleView extends View {
         canvas.drawCircle(oldTop.x, 0, oldBottom.y, paint);
     }
 
+    /**
+     * 拉断时的距离
+     */
     private int maxDistance = 500;
 
     @Override
@@ -139,8 +142,8 @@ public class QQBubbleView extends View {
 
 
                 if (distance < maxDistance) {
-                    oldTop.y = -(2 * newTop.y / 3 / Math.abs(maxDistance) * Math.abs(distance) - newTop.y);
-                    oldBottom.y = (2 * newTop.y / 3 / Math.abs(maxDistance) * Math.abs(distance) - newTop.y);
+                    oldTop.y = -(2 * newTop.y / 4 / Math.abs(maxDistance) * Math.abs(distance) - newTop.y);
+                    oldBottom.y = (2 * newTop.y / 4 / Math.abs(maxDistance) * Math.abs(distance) - newTop.y);
                 } else {
                     isBreak = true;
                 }
