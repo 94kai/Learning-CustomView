@@ -21,7 +21,7 @@ import static android.R.attr.path;
 import static android.R.attr.start;
 
 /**
- * 搜索View
+ * 搜索View  点击屏幕左边启动动画  点击右边结束动画
  * Created by xuekai on 2017/2/21.
  */
 
@@ -113,6 +113,8 @@ public class SearchView extends View {
     private static final String TAG = "SearchView";
 
     private void drawSearch(Canvas canvas) {
+
+
         Log.e(TAG, "drawSearch");
         switch (STATE_CURRENT) {
             case STATE_PRE:
@@ -121,6 +123,9 @@ public class SearchView extends View {
                 canvas.drawPath(magnifyPathDst, mPaint);
                 break;
             case STATE_LOADING:
+
+
+
                 loadingPathDst.rewind();
                 stop = (float) (1.1 * load_progress * loadingPathLength);
                 start = (float) (stop - loadingRadius / 5 * Math.PI * Math.sin(load_progress * Math.PI));
@@ -165,7 +170,7 @@ public class SearchView extends View {
     /**
      * 开始加载动画
      */
-    public void startLoading() {
+    private void startLoading() {
         STATE_CURRENT = STATE_LOADING;
         loadingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -187,7 +192,6 @@ public class SearchView extends View {
                     isStop = false;
                     stopAnimation();
                 } else {
-                    Log.e(TAG,"发消息");
                     handler.sendEmptyMessage(0);
                 }
             }
@@ -210,7 +214,7 @@ public class SearchView extends View {
     /**
      * 开始准备动画
      */
-    public void stateAnimation() {
+    private void stateAnimation() {
         STATE_CURRENT = STATE_PRE;
         preAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -248,7 +252,7 @@ public class SearchView extends View {
     /**
      * 开始结束动画
      */
-    public void stopAnimation() {
+    private void stopAnimation() {
         STATE_CURRENT = STATE_AFTER;
         afterAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -297,10 +301,15 @@ public class SearchView extends View {
     }
 
 
+    /**
+     * xxxxx
+     */
     public void start() {
         stateAnimation();
     }
-
+    /**
+     * xxxxx
+     */
     public void stop() {
         isStop = true;
     }
