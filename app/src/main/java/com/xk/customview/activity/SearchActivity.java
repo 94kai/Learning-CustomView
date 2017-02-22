@@ -19,6 +19,7 @@ public class SearchActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
+        getSupportActionBar().setTitle("点击左半屏开始搜索，点击右半屏，停止搜索");
+//        getActionBar().setTitle("点击左半屏开始搜索，点击右半屏，停止搜索");
     }
 }
