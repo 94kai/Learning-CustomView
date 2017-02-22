@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Toast;
 
 import static android.R.attr.path;
@@ -72,6 +74,8 @@ public class SearchView extends View {
         magnifyPos[0] = (float) (-loadingRadius * Math.sqrt(2) / 4);
         magnifyPos[1] = (float) (-loadingRadius * Math.sqrt(2) / 4);
 
+
+
         setBackgroundColor(0xff007FD4);
 
         mPaint = new Paint();
@@ -79,6 +83,7 @@ public class SearchView extends View {
         mPaint.setStrokeWidth(10);
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
 
 
         magnifyPath = new Path();
@@ -86,7 +91,6 @@ public class SearchView extends View {
         magnifyPath.lineTo((float) (loadingRadius / Math.sqrt(2)), (float) (loadingRadius / Math.sqrt(2)));
         loadPath = new Path();
         loadPath.addArc(new RectF(-loadingRadius, -loadingRadius, loadingRadius, loadingRadius), 45, -359.9f);
-
 
         magnifyPathMeasure = new PathMeasure();
         magnifyPathMeasure.setPath(magnifyPath, false);
@@ -115,7 +119,6 @@ public class SearchView extends View {
     private void drawSearch(Canvas canvas) {
 
 
-        Log.e(TAG, "drawSearch");
         switch (STATE_CURRENT) {
             case STATE_PRE:
                 magnifyPathDst.rewind();
@@ -125,10 +128,9 @@ public class SearchView extends View {
             case STATE_LOADING:
 
 
-
                 loadingPathDst.rewind();
-                stop = (float) (1.1 * load_progress * loadingPathLength);
-                start = (float) (stop - loadingRadius / 5 * Math.PI * Math.sin(load_progress * Math.PI));
+                stop = (float) (load_progress * loadingPathLength);
+                start = (float) (stop - loadingRadius / 4 * Math.PI * Math.sin(load_progress * Math.PI));
 
                 loadingPathMeasure.getSegment(start, stop, loadingPathDst, true);
                 canvas.drawPath(loadingPathDst, mPaint);
@@ -207,7 +209,7 @@ public class SearchView extends View {
             }
         });
         loadingAnimator.setDuration(2000);
-
+        loadingAnimator.setInterpolator(new AccelerateInterpolator());
         loadingAnimator.start();
     }
 
