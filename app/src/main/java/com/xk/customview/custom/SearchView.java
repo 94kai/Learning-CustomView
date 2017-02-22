@@ -122,6 +122,7 @@ public class SearchView extends View {
         switch (STATE_CURRENT) {
             case STATE_PRE:
                 magnifyPathDst.rewind();
+                magnifyPathDst.rLineTo(0,0);//解决4.4之前开启硬件加速导致绘图失败
                 magnifyPathMeasure.getSegment(pre_progress * magnifyPathLength, magnifyPathLength, magnifyPathDst, true);
                 canvas.drawPath(magnifyPathDst, mPaint);
                 break;
@@ -131,6 +132,7 @@ public class SearchView extends View {
                 loadingPathDst.rewind();
                 stop = (float) (load_progress * loadingPathLength);
                 start = (float) (stop - loadingRadius / 4 * Math.PI * Math.sin(load_progress * Math.PI));
+                loadingPathDst.rLineTo(0,0);//解决4.4之前开启硬件加速导致绘图失败
 
                 loadingPathMeasure.getSegment(start, stop, loadingPathDst, true);
                 canvas.drawPath(loadingPathDst, mPaint);
@@ -140,6 +142,7 @@ public class SearchView extends View {
             case STATE_AFTER:
 
                 magnifyPathDst.rewind();
+                magnifyPathDst.rLineTo(0,0);//解决4.4之前开启硬件加速导致绘图失败
                 magnifyPathMeasure.getSegment((1 - after_progress) * magnifyPathLength, magnifyPathLength, magnifyPathDst, true);
                 canvas.drawPath(magnifyPathDst, mPaint);
                 break;
