@@ -62,7 +62,7 @@ public class ZoomImageView extends ImageView implements ScaleGestureDetector.OnS
     private GestureDetector gestureDetector;
 
     public ZoomImageView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public ZoomImageView(Context context, AttributeSet attrs) {
@@ -146,6 +146,8 @@ public class ZoomImageView extends ImageView implements ScaleGestureDetector.OnS
     }
 
     private float x, y;
+
+
 
     /**
      * 处理滑动2(让图片移动)
