@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -13,15 +14,34 @@ import android.view.View;
 
 import com.xk.customview.R;
 
+import static android.R.attr.bitmap;
+import static android.R.attr.src;
+
 /**
  * Created by xuekai on 2017/2/23.
  */
 
 public class FoldingLayout extends View {
+    //real表示完全展开的宽度 current表示折叠后的宽度
+    private float foldAngle = (float) (Math.PI / 2);
+    private float realWidth;
+    private float realHeight;
+    private float currentWidth;
+    private float currentHeight;
 
-    private Matrix matrix;
-    private BitmapFactory.Options options;
+    private float bitmapWidth;
+    private float bitmapHeight;
+
+    private float[] src = new float[8];
+    private float[] dst = new float[8];
+
+    //折叠后y的偏移量
+    private float deltaY;
+
+    private int FOLD_COUNT = 6;
+    private Matrix[] matrices = new Matrix[FOLD_COUNT];
     private Bitmap bitmap;
+
 
     public FoldingLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -30,37 +50,85 @@ public class FoldingLayout extends View {
 
 
     private void init() {
-        options = new BitmapFactory.Options();
-//        options.inJustDecodeBounds = true;
 
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        options.outHeight = h;
-        options.outWidth = w;
-        bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.dada, options);
-//        float wScale = bitmap.getWidth()*1f / w;
-//        float hScale = bitmap.getHeight()*1f / h;
+
+        realHeight = h;
+        realWidth = w;
+
+        bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.dada);
+        bitmapWidth = bitmap.getWidth();
+        bitmapHeight = bitmap.getHeight();
 
 
-        matrix = new Matrix();
-        float[] src = {0, 0,
-                bitmap.getWidth(), 0,
-                0, bitmap.getHeight(),
-                bitmap.getWidth(), bitmap.getHeight()
-        };
-        float[] dst = {0, 0,
-                bitmap.getWidth(), getHeight() / 3,
-                0, bitmap.getHeight(),
-                bitmap.getWidth(), bitmap.getHeight() / 3 * 2
-        };
-        matrix.setPolyToPoly(src, 0, dst, 0,   src.length >> 1);
+        for (int i = 0; i < FOLD_COUNT; i++) {
+            matrices[i] = new Matrix();
+
+        }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bitmap,matrix,new Paint());
+        initMatrix();
 
+        for (int i = 0; i < FOLD_COUNT; i++) {
+            canvas.save();
+
+//            canvas.concat(matrices[i]);
+//            canvas.clipRect(i * bitmapWidth / FOLD_COUNT,0,i * bitmapWidth / FOLD_COUNT + bitmapWidth / FOLD_COUNT,bitmapHeight);
+//            canvas.drawBitmap(bitmap,0,0,null);
+            canvas.save();
+            canvas.concat(matrices[i]);
+
+            canvas.clipRect(bitmapWidth / FOLD_COUNT*i,0,bitmapWidth / FOLD_COUNT*(i+1),getHeight());
+
+            canvas.drawBitmap(bitmap, 0, 0, null);
+
+//            canvas.drawRect(0,0,getWidth(),getHeight(),new Paint());
+            canvas.restore();
+
+        }
+        change();
+
+    }
+
+    private void initMatrix() {
+        currentWidth = (float) (bitmapWidth * Math.sin(foldAngle));
+        currentHeight = bitmapHeight;
+
+        deltaY = (float) (currentWidth / FOLD_COUNT / Math.tan(foldAngle));
+
+        for (int i = 0; i < FOLD_COUNT; i++) {
+            matrices[i].reset();
+            src[0] = i * bitmapWidth / FOLD_COUNT;
+            src[1] = 0;
+            src[2] = src[0] + bitmapWidth / FOLD_COUNT;
+            src[3] = 0;
+            src[4] = src[0];
+            src[5] = bitmapHeight;
+            src[6] = src[2];
+            src[7] = bitmapHeight;
+            dst[0] = i * currentWidth / FOLD_COUNT;
+            dst[1] = i % 2 == 0 ? 0 : deltaY;
+            dst[2] = dst[0] + currentWidth / FOLD_COUNT;
+            dst[3] = i % 2 == 0 ? deltaY : 0;
+            dst[4] = dst[0];
+            dst[5] = i % 2 == 0 ? currentHeight : currentHeight - deltaY;
+            dst[6] = dst[2];
+            dst[7] = i % 2 == 0 ? currentHeight - deltaY : currentHeight;
+
+            matrices[i].setPolyToPoly(src, 0, dst, 0, 4);
+
+        }
+    }
+
+
+    public void change() {
+        foldAngle = (float) (foldAngle - 0.001);
+        if (foldAngle <= 0) foldAngle = (float) (Math.PI / 2);
+        invalidate();
     }
 }
