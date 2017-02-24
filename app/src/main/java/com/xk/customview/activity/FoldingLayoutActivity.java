@@ -15,8 +15,5 @@ public class FoldingLayoutActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foldinglayout);
-        getSupportActionBar().setTitle("有bug，放弃了");
-//        FoldLayout v= (FoldLayout) findViewById(R.id.aaa);
-//        v.setFactor(0.1f);
     }
 }
