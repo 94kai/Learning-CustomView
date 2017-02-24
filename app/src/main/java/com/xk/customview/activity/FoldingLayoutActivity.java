@@ -3,10 +3,8 @@ package com.xk.customview.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.xk.customview.R;
-import com.xk.customview.custom.FoldLayout;
 
 /**
  * Created by xuekai on 2017/2/23.

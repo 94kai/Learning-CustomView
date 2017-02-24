@@ -7,9 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.xk.customview.R;
@@ -41,6 +43,7 @@ public class FoldingLayout extends View {
     private int FOLD_COUNT = 6;
     private Matrix[] matrices = new Matrix[FOLD_COUNT];
     private Bitmap bitmap;
+    private Paint paint;
 
 
     public FoldingLayout(Context context, AttributeSet attrs) {
@@ -50,7 +53,8 @@ public class FoldingLayout extends View {
 
 
     private void init() {
-
+        paint = new Paint();
+        paint.setAntiAlias(true);
     }
 
     @Override
@@ -75,25 +79,20 @@ public class FoldingLayout extends View {
         initMatrix();
 
         for (int i = 0; i < FOLD_COUNT; i++) {
-            canvas.save();
 
-//            canvas.concat(matrices[i]);
-//            canvas.clipRect(i * bitmapWidth / FOLD_COUNT,0,i * bitmapWidth / FOLD_COUNT + bitmapWidth / FOLD_COUNT,bitmapHeight);
-//            canvas.drawBitmap(bitmap,0,0,null);
+
             canvas.save();
+            canvas.clipRect(currentWidth / FOLD_COUNT * i, 0, currentWidth / FOLD_COUNT * (i + 1), getHeight());
             canvas.concat(matrices[i]);
-
-            canvas.clipRect(bitmapWidth / FOLD_COUNT*i,0,bitmapWidth / FOLD_COUNT*(i+1),getHeight());
-
             canvas.drawBitmap(bitmap, 0, 0, null);
-
-//            canvas.drawRect(0,0,getWidth(),getHeight(),new Paint());
             canvas.restore();
 
         }
         change();
 
     }
+
+    private static final String TAG = "FoldingLayout";
 
     private void initMatrix() {
         currentWidth = (float) (bitmapWidth * Math.sin(foldAngle));
@@ -111,6 +110,7 @@ public class FoldingLayout extends View {
             src[5] = bitmapHeight;
             src[6] = src[2];
             src[7] = bitmapHeight;
+
             dst[0] = i * currentWidth / FOLD_COUNT;
             dst[1] = i % 2 == 0 ? 0 : deltaY;
             dst[2] = dst[0] + currentWidth / FOLD_COUNT;
@@ -127,7 +127,7 @@ public class FoldingLayout extends View {
 
 
     public void change() {
-        foldAngle = (float) (foldAngle - 0.001);
+        foldAngle = (float) (foldAngle - 0.01);
         if (foldAngle <= 0) foldAngle = (float) (Math.PI / 2);
         invalidate();
     }
