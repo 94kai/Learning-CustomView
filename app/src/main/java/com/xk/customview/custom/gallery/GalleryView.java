@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
@@ -46,18 +47,15 @@ public class GalleryView extends RecyclerView {
 
     @Override
     public void computeScroll() {
-        int lastX = 0;
-        if (isFirst) {
-            isFirst = false;
-        } else {
-            lastX = mScroller.getCurrX();
-        }
-
+//        int lastX = 0;
+//        if (isFirst) {
+//            isFirst = false;
+//        } else {
+//            lastX = mScroller.getCurrX();
+//        }
         if (mScroller.computeScrollOffset()) {
-            scrollBy(mScroller.getCurrX() - lastX, 0);
-            float  progress=  (10);
-            GalleryItem item= (GalleryItem) getChildAt(0);
-            item.change(progress);
+            Log.e("GalleryView","computeScroll"+(mScroller.getCurrX()));
+            scrollBy(10 , 100);
             invalidate();
         }
     }
@@ -65,13 +63,13 @@ public class GalleryView extends RecyclerView {
     private boolean isFirst;
 
     public void smoothScroll(int dx) {
-
-//        getScrollX()
-
-        mScroller.startScroll(getScrollX(), getScrollY(), dx, 0, 3000);
+        mScroller.startScroll(getScrollX(), getScrollY(), dx, 0, 300);
         isFirst = true;
         invalidate();
-        Log.e(TAG, "mStartScroller");
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        return false;
+    }
 }

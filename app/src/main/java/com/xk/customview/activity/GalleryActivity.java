@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.KeyEvent;
+import android.view.View;
 
 import com.xk.customview.R;
 import com.xk.customview.custom.MagicCircle;
@@ -42,8 +43,26 @@ public class GalleryActivity extends AppCompatActivity {
 
         galleryView.setAdapter(galleryAdapter);
 
-        galleryView.scrollToPosition(50);
+//        galleryView.scrollToPosition(50);
         galleryView.requestFocus();
+
+
+
+
+
+
+        findViewById(R.id.last).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                galleryView.last();
+            }
+        });
+        findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                galleryView.next();
+            }
+        });
     }
 
     @Override
