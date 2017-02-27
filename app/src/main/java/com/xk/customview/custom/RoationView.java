@@ -10,13 +10,11 @@ import android.graphics.PathMeasure;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.xk.customview.R;
 
-import static android.R.attr.bitmap;
 import static android.R.attr.path;
 
 /**
@@ -43,7 +41,6 @@ public class RoationView extends View {
         paint.setStyle(Paint.Style.FILL);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.translate(getWidth() / 2, getHeight() / 2);

@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         String[] datas = {"0.Demo", "1.叶子进度条", "2.弹性球", "3.蜘蛛网（游戏属性图）", "4.qq未读消息气泡", "5.刻度表", "6.圆->心"
-                , "7.旋转箭头", "8.搜索放大镜", "9.模仿可缩放的imageview（鸿洋）", "10.模仿折叠的layout（鸿洋）"};
+                , "7.旋转箭头", "8.搜索放大镜", "9.模仿可缩放的imageview（鸿洋）", "10.模仿折叠的layout（鸿洋）"
+                , "11.事件分发","12.3D画廊"};
 
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, datas));
@@ -63,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 10:
                         startActivity(new Intent(MainActivity.this, FoldingLayoutActivity.class));
+                        break;
+                    case 11:
+                        startActivity(new Intent(MainActivity.this, EventDispatchActivity.class));
+                        break;
+                    case 12:
+                        startActivity(new Intent(MainActivity.this, GalleryActivity.class));
                         break;
                 }
             }

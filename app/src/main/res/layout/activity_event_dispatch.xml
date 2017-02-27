@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xk.customview.custom.eventDispatch.RootView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_margin="20dp"
+    android:background="#4E5268">
+
+    <com.xk.customview.custom.eventDispatch.ViewGroup1
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="#95C3FA">
+
+        <com.xk.customview.custom.eventDispatch.View1
+            android:layout_width="130dp"
+            android:id="@+id/view"
+            android:layout_height="130dp"
+            android:background="#BDDA66" />
+
+    </com.xk.customview.custom.eventDispatch.ViewGroup1>
+
+    <com.xk.customview.custom.eventDispatch.View2
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentRight="true"
+        android:background="#BDDA66" />
+
+</com.xk.customview.custom.eventDispatch.RootView>
