@@ -22,8 +22,10 @@
         <activity android:name=".activity.InstrumentActivity" />
         <activity android:name=".activity.RoationActivity" />
         <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.GalleryActivity" />
         <activity android:name=".activity.ZoomImageViewPagerActivity" />
         <activity android:name=".activity.FoldingLayoutActivity" />
+        <activity android:name=".activity.EventDispatchActivity" />
         <activity android:name=".activity.DemoActivity" />
         <activity android:name=".activity.QQBubbleActivity">
         </activity>

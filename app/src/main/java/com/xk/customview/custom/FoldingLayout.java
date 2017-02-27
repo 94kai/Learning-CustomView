@@ -18,8 +18,6 @@ import android.view.View;
 
 import com.xk.customview.R;
 
-import static android.R.attr.bitmap;
-import static android.R.attr.src;
 
 /**
  * 这个View坑死我了，deltaY = (float) (currentWidth / FOLD_COUNT / Math.tan(foldAngle))/3;
@@ -95,7 +93,8 @@ public class FoldingLayout extends View {
             canvas.save();
             canvas.concat(matrices[i]);
 
-            canvas.clipRect(bitmapWidth / FOLD_COUNT * i, 0, bitmapWidth / FOLD_COUNT * (i + 1), getHeight());
+            canvas.clipRect(bitmapWidth / FOLD_COUNT * i, 0, bitmapWidth / FOLD_COUNT * (i + 1),
+                    getHeight());
             canvas.drawBitmap(bitmap, 0, 0, null);
 
 

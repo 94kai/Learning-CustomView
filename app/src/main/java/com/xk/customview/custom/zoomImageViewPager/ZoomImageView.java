@@ -3,11 +3,15 @@ package com.xk.customview.custom.zoomImageViewPager;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.graphics.drawable
         .Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
