@@ -11,6 +11,7 @@ import android.view.View;
 import com.xk.customview.R;
 import com.xk.customview.custom.MagicCircle;
 import com.xk.customview.custom.gallery.GalleryAdapter;
+import com.xk.customview.custom.gallery.GalleryItem;
 import com.xk.customview.custom.gallery.GalleryView;
 
 import java.util.ArrayList;
@@ -43,8 +44,7 @@ public class GalleryActivity extends AppCompatActivity {
 
         galleryView.setAdapter(galleryAdapter);
 
-//        galleryView.scrollToPosition(50);
-        galleryView.requestFocus();
+        galleryView.scrollToPosition(50);
 
 
 
