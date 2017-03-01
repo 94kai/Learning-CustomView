@@ -2,9 +2,11 @@ package com.xk.customview.custom.gallery;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -23,16 +25,34 @@ public class GalleryView extends RecyclerView {
     private GalleryItem galleryRightItem1;
     private GalleryItem galleryRightItem2;
     private GalleryItem galleryRightItem3;
+    //动画事件
+    private int duration = 300;
+    //间隔的事件
+    private int interval = 1000;
+    private GalleryAdapter galleryAdapter;
 
     public GalleryView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
+    }
+
+    private void init() {
         mScroller = new Scroller(getContext(), new LinearInterpolator());
+        setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        galleryAdapter = new GalleryAdapter(getContext(), null);
+        setAdapter(galleryAdapter);
+    }
+
+    public void setDatas(SparseArray<Integer> datas) {
+        galleryAdapter.setDatas(datas);
     }
 
     /**
      * 下一张图片
      */
     public void next() {
+        if (!mScroller.isFinished()) return;
+
         isLeft = false;
         isPrepare = false;
         //runnable,让即将出现的那个一个item提前变成梯形
@@ -71,6 +91,7 @@ public class GalleryView extends RecyclerView {
      * 上一张图片
      */
     public void last() {
+        if (!mScroller.isFinished()) return;
         isLeft = true;
         isPrepare = false;
 
@@ -113,7 +134,7 @@ public class GalleryView extends RecyclerView {
 
 
     public void smoothScroll(int dx, Runnable runnable, int time) {
-        mScroller.startScroll(getScrollX(), getScrollY(), dx, 0, 3000);
+        mScroller.startScroll(getScrollX(), getScrollY(), dx, 0, duration);
         isFirst = true;
         invalidate();
         if (time == 0) {
@@ -148,5 +169,47 @@ public class GalleryView extends RecyclerView {
             }
 
         }
+    }
+
+    @Override
+    public void setAdapter(Adapter adapter) {
+        super.setAdapter(adapter);
+        scrollToPosition(Integer.MAX_VALUE / 2);
+    }
+
+    private boolean isStop = true;
+
+    public void stop() {
+        isStop = true;
+    }
+
+    public void start() {
+        isStop = false;
+        play();
+    }
+
+    /**
+     * 设置动画执行的时间
+     * @param duration
+     */
+    public void setDuration(int duration){
+        this.duration=duration;
+    } /**
+     * 设置动画执行的时间
+     * @param interval
+     */
+    public void setInterval(int interval){
+        this.interval=interval;
+    }
+    private void play() {
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!isStop) {
+                    next();
+                    play();
+                }
+            }
+        }, interval + duration);
     }
 }

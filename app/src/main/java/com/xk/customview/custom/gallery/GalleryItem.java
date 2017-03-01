@@ -47,7 +47,6 @@ public class GalleryItem extends ImageView {
     private int intrinsicHeight;
 
     private boolean sizeChange = false;
-    private Matrix originalMatirx;
 
     private @MatrixState int originalState;
 
@@ -81,7 +80,6 @@ public class GalleryItem extends ImageView {
     }
 
     private void maunalFitXY() {
-        if (currentState != STATE_MIDDLE) {
             matrix.reset();
             drawable = getDrawable();
             intrinsicWidth = drawable.getIntrinsicWidth();
@@ -106,28 +104,10 @@ public class GalleryItem extends ImageView {
 
             matrix.setPolyToPoly(src, 0, dst, 0, 4);
             setImageMatrix(matrix);
-            currentState = STATE_MIDDLE;
 
             originalRect.set(0, 0, intrinsicWidth, intrinsicHeight);
             matrix.mapRect(originalRect);
-        }
 
-    }
-
-    boolean draw = false;
-
-    public void drawSign() {
-        draw = true;
-        invalidate();
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        if (draw) {
-            canvas.drawCircle(0, 0, 50, new Paint());
-            draw=false;
-        }
     }
 
     @Override

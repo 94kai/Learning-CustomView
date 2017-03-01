@@ -9,14 +9,13 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import com.xk.customview.R;
-import com.xk.customview.custom.MagicCircle;
 import com.xk.customview.custom.gallery.GalleryAdapter;
-import com.xk.customview.custom.gallery.GalleryItem;
 import com.xk.customview.custom.gallery.GalleryView;
 
 import java.util.ArrayList;
 
 /**
+ * 方法：创建一个GalleryView， setDatas设置图片id(目前只支持本地资源图片，网络可以直接修改代码) ，last、next表示前后翻页，  start、stop表示开启、停止动画
  * Created by xuekai on 2017/2/20.
  */
 
@@ -38,14 +37,9 @@ public class GalleryActivity extends AppCompatActivity {
         datas.append(3, R.mipmap.dddd);
         datas.append(4, R.mipmap.eeeee);
 
-        GalleryAdapter galleryAdapter = new GalleryAdapter(this, datas);
 
-        galleryView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        galleryView.setAdapter(galleryAdapter);
-
-        galleryView.scrollToPosition(50);
-
+        galleryView.setDatas(datas);
 
 
 
@@ -73,6 +67,13 @@ public class GalleryActivity extends AppCompatActivity {
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
                 galleryView.next();
+
+                break;
+            case KeyEvent.KEYCODE_DPAD_UP:
+                galleryView.start();
+                break;
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                galleryView.stop();
 
                 break;
         }

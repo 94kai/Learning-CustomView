@@ -21,13 +21,17 @@ import java.util.List;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MViewHolder> {
     private Context context;
-    private SparseArray<Integer> datas = new SparseArray<Integer>();
+    private SparseArray<Integer> datas =new SparseArray<>();
 
     public GalleryAdapter(Context context, SparseArray<Integer> datas) {
         this.context = context;
         this.datas = datas;
     }
 
+    public void setDatas(SparseArray<Integer> datas) {
+        this.datas = datas;
+        notifyDataSetChanged();
+    }
 
     @Override
     public MViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,12 +44,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MViewHol
 
     @Override
     public void onBindViewHolder(MViewHolder holder, int position) {
-        holder.imageView.setImageResource(datas.get(position % 5));
+        if (datas!=null&&datas.size() >0) {
+            holder.imageView.setImageResource(datas.get(position % datas.size()));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 100;
+        return (datas!=null&&datas.size() >0)?Integer.MAX_VALUE:0;
     }
 
     class MViewHolder extends RecyclerView.ViewHolder {
