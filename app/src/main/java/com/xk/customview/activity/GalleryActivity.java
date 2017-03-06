@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.xk.customview.R;
 import com.xk.customview.custom.gallery.GalleryAdapter;
@@ -38,7 +39,6 @@ public class GalleryActivity extends AppCompatActivity {
         datas.append(4, R.mipmap.eeeee);
 
 
-
         galleryView.setDatas(datas);
 
 
@@ -54,7 +54,8 @@ public class GalleryActivity extends AppCompatActivity {
         findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                galleryView.next();
+                galleryView.start();
+
             }
         });
     }
