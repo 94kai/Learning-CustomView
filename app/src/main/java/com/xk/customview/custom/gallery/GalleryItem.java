@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by xuekai on 2017/2/27.

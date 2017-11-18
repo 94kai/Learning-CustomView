@@ -15,20 +15,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CircleAndHeartActivity" />
-        <activity android:name=".activity.LeafProgressActivity" />
-        <activity android:name=".activity.MagicCircleActivity" />
-        <activity android:name=".activity.SpiderActivity" />
-        <activity android:name=".activity.InstrumentActivity" />
-        <activity android:name=".activity.RoationActivity" />
-        <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.GalleryActivity" />
-        <activity android:name=".activity.ZoomImageViewPagerActivity" />
-        <activity android:name=".activity.FoldingLayoutActivity" />
-        <activity android:name=".activity.EventDispatchActivity" />
-        <activity android:name=".activity.DemoActivity" />
-        <activity android:name=".activity.QQBubbleActivity">
-        </activity>
+        <activity android:name=".activity.CircleAndHeartActivityView" />
+        <activity android:name=".activity.LeafProgressActivityView" />
+        <activity android:name=".activity.MagicCircleActivityView" />
+        <activity android:name=".activity.SpiderActivityView" />
+        <activity android:name=".activity.InstrumentActivityView" />
+        <activity android:name=".activity.RoationActivityView" />
+        <activity android:name=".activity.SearchActivityView" />
+        <activity android:name=".activity.GalleryActivityView" />
+        <activity android:name=".activity.ZoomImageViewPagerActivityView" />
+        <activity android:name=".activity.FoldingLayoutActivityView" />
+        <activity android:name=".activity.EventDispatchActivityView" />
+        <activity android:name=".activity.DemoActivityView" />
+        <activity android:name=".activity.QQBubbleActivityView"></activity>
+        <activity android:name=".activity.HotLabelActivityView"></activity>
     </application>
 
 </manifest>

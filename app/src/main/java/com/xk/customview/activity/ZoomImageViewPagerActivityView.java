@@ -1,11 +1,8 @@
 package com.xk.customview.activity;
 
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.xk.customview.R;
 import com.xk.customview.custom.zoomImageViewPager.MAdapter;
@@ -16,9 +13,9 @@ import java.util.ArrayList;
  * Created by xuekai on 2017/2/20.
  */
 
-public class ZoomImageViewPagerActivity extends AppCompatActivity {
+public class ZoomImageViewPagerActivityView extends ViewBaseActivity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zoom_viewpager);
 

@@ -2,7 +2,6 @@ package com.xk.customview.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.xk.customview.R;
 
@@ -10,9 +9,9 @@ import com.xk.customview.R;
  * Created by xuekai on 2017/2/23.
  */
 
-public class FoldingLayoutActivity extends AppCompatActivity {
+public class FoldingLayoutActivityView extends ViewBaseActivity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foldinglayout);
     }

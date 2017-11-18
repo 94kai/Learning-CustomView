@@ -5,15 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.xk.customview.R;
-import com.xk.customview.activity.GalleryActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by xuekai on 2017/2/27.
