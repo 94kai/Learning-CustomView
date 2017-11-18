@@ -3,13 +3,15 @@ package com.xk.customview.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.xk.customview.R;
+import com.xk.customview.activity.custominject.LISTVIEW_ITEMCLICK;
+import com.xk.ioclibrary.annotations.InjectContentView;
+import com.xk.ioclibrary.annotations.event.InjectEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,16 +19,20 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity {
+@InjectContentView(R.layout.activity_main)
+public class MainActivity extends ViewBaseActivity {
     private static final String TAG = "MainActivity";
+    private ArrayList<String> datas;
+    private HashMap<String, Class<? extends Activity>> stringClassHashMap;
+//    @InjectView(R.id.list)
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ListView listView = (ListView) findViewById(R.id.list);
 
-        final ArrayList<String> datas = new ArrayList<>();
-        final HashMap<String, Class<? extends Activity>> stringClassHashMap = new HashMap<>();
+        datas = new ArrayList<>();
+        stringClassHashMap = new HashMap<>();
 
 
         stringClassHashMap.put("0.Demo", DemoActivityView.class);
@@ -56,18 +62,22 @@ public class MainActivity extends AppCompatActivity {
                 return o11 - o22;
             }
         });
-        ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, datas));
+//
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            }
+//        });
+    }
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Class<? extends Activity> aClass = stringClassHashMap.get(datas.get(position));
-                Intent intent = new Intent(MainActivity.this, aClass);
-                intent.putExtra("title", datas.get(position));
-                startActivity(intent);
-            }
-        });
+    @InjectEvent(ids = {R.id.list}, event = LISTVIEW_ITEMCLICK.class)
+    public void itemclick(AdapterView<?> parent, View view, int position, long id) {
+        Class<? extends Activity> aClass = stringClassHashMap.get(datas.get(position));
+        Intent intent = new Intent(MainActivity.this, aClass);
+        intent.putExtra("title", datas.get(position));
+        startActivity(intent);
+
     }
 
     /**
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         for (char c : o1.toCharArray()) {
             if (c <= '9' && c >= '0') {
                 index += c;
-            }else{
+            } else {
                 break;
             }
         }

@@ -18,7 +18,13 @@ android {
         }
     }
 }
+repositories {
+//        jcenter()
+    maven {
+        url 'https://dl.bintray.com/xuekai/kinject/'
+    }
 
+}
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -29,4 +35,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.xk:kinject:1.0.0'
 }
