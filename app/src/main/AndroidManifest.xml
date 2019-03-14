@@ -27,6 +27,7 @@
         <activity android:name=".activity.FoldingLayoutActivityView" />
         <activity android:name=".activity.EventDispatchActivityView" />
         <activity android:name=".activity.DemoActivityView" />
+        <activity android:name=".activity.RevealDrawableActivityView" />
         <activity android:name=".activity.QQBubbleActivityView"></activity>
         <activity android:name=".activity.HotLabelActivityView"></activity>
     </application>

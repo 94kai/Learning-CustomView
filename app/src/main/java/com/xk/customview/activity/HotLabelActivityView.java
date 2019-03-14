@@ -7,19 +7,17 @@ import android.widget.TextView;
 
 import com.xk.customview.R;
 import com.xk.customview.custom.HotLabelView;
-import com.xk.ioclibrary.annotations.InjectContentView;
-import com.xk.ioclibrary.annotations.InjectView;
 
 import java.util.Random;
 
-@InjectContentView(R.layout.activity_hot_label)
 public class HotLabelActivityView extends ViewBaseActivity {
-    @InjectView(R.id.hotlabel)
     private HotLabelView hotLabelView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hot_label);
+        hotLabelView = (HotLabelView) findViewById(R.id.hotlabel);
         Random random = new Random();
 
         for (int i = 0; i < 50; i++) {

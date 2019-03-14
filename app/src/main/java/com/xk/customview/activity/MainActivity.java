@@ -9,9 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.xk.customview.R;
-import com.xk.customview.activity.custominject.LISTVIEW_ITEMCLICK;
-import com.xk.ioclibrary.annotations.InjectContentView;
-import com.xk.ioclibrary.annotations.event.InjectEvent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,22 +16,19 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
 
-@InjectContentView(R.layout.activity_main)
 public class MainActivity extends ViewBaseActivity {
     private static final String TAG = "MainActivity";
     private ArrayList<String> datas;
     private HashMap<String, Class<? extends Activity>> stringClassHashMap;
-//    @InjectView(R.id.list)
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         ListView listView = (ListView) findViewById(R.id.list);
 
         datas = new ArrayList<>();
         stringClassHashMap = new HashMap<>();
-
-
         stringClassHashMap.put("0.Demo", DemoActivityView.class);
         stringClassHashMap.put("1.叶子进度条", LeafProgressActivityView.class);
         stringClassHashMap.put("2.弹性球", MagicCircleActivityView.class);
@@ -49,6 +43,7 @@ public class MainActivity extends ViewBaseActivity {
         stringClassHashMap.put("11.事件分发", EventDispatchActivityView.class);
         stringClassHashMap.put("12.3D画廊", GalleryActivityView.class);
         stringClassHashMap.put("13.仿华为应用商店 自动换行标签", HotLabelActivityView.class);
+        stringClassHashMap.put("14.Drawable实现滚动颜色变化", RevealDrawableActivityView.class);
         Set<String> strings = stringClassHashMap.keySet();
 
         for (String string : strings) {
@@ -63,15 +58,14 @@ public class MainActivity extends ViewBaseActivity {
             }
         });
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, datas));
-//
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                itemclick(parent, view, position, id);
+            }
+        });
     }
 
-    @InjectEvent(ids = {R.id.list}, event = LISTVIEW_ITEMCLICK.class)
     public void itemclick(AdapterView<?> parent, View view, int position, long id) {
         Class<? extends Activity> aClass = stringClassHashMap.get(datas.get(position));
         Intent intent = new Intent(MainActivity.this, aClass);
