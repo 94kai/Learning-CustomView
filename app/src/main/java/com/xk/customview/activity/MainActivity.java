@@ -33,7 +33,7 @@ public class MainActivity extends ViewBaseActivity {
         stringClassHashMap.put("1.叶子进度条", LeafProgressActivityView.class);
         stringClassHashMap.put("2.弹性球", MagicCircleActivityView.class);
         stringClassHashMap.put("3.蜘蛛网（游戏属性图）", SpiderActivityView.class);
-        stringClassHashMap.put("4.qq未读消息气泡", QQBubbleActivityView.class);
+        stringClassHashMap.put("4.贝塞尔曲线", QQBubbleActivityView.class);
         stringClassHashMap.put("5.刻度表", InstrumentActivityView.class);
         stringClassHashMap.put("6.圆->心", CircleAndHeartActivityView.class);
         stringClassHashMap.put("7.旋转箭头", RoationActivityView.class);

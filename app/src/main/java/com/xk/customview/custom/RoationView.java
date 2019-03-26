@@ -8,14 +8,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.xk.customview.R;
-
-import static android.R.attr.path;
 
 /**
  * Created by xuekai on 2017/2/20.
@@ -57,12 +53,9 @@ public class RoationView extends View {
         if (progress > 1200) {
             progress = 1;
         }
+
 //        pathMeasure.getPosTan(progress, pos, tan);
-//
-//
-//
 //        Matrix matrix = new Matrix();
-//
 //        matrix.postRotate((float) (Math.atan2(tan[1], tan[0]) * 180 / Math.PI), bitmap.getWidth() / 2, bitmap.getHeight() / 2);
 //        matrix.postTranslate(pos[0]-bitmap.getWidth()/2, pos[1]-bitmap.getHeight()/2);
 
