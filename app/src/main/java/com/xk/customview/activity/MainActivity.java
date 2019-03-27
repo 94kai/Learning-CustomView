@@ -44,6 +44,7 @@ public class MainActivity extends ViewBaseActivity {
         stringClassHashMap.put("12.3D画廊", GalleryActivityView.class);
         stringClassHashMap.put("13.仿华为应用商店 自动换行标签", HotLabelActivityView.class);
         stringClassHashMap.put("14.Drawable实现滚动颜色变化", RevealDrawableActivityView.class);
+        stringClassHashMap.put("15.策略模式属性动画", StrategyAnimationActivity.class);
         Set<String> strings = stringClassHashMap.keySet();
 
         for (String string : strings) {

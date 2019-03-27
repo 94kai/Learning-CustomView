@@ -30,6 +30,7 @@
         <activity android:name=".activity.RevealDrawableActivityView" />
         <activity android:name=".activity.QQBubbleActivityView"></activity>
         <activity android:name=".activity.HotLabelActivityView"></activity>
+        <activity android:name=".activity.StrategyAnimationActivity"></activity>
     </application>
 
 </manifest>
