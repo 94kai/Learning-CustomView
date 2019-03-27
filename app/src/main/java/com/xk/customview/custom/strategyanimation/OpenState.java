@@ -12,7 +12,9 @@ public class OpenState extends StrategyState {
     public OpenState(final View view, int width, int height) {
         super(view, width, height);
         //构造这个状态的时候，就开始一个动画
-        animator = ValueAnimator.ofInt(0, height / 2);
+        //注意圆的半径和描边有关系，要想让园里面空心为0，半径设置为描边的一半
+        int a = height/2;
+        animator = ValueAnimator.ofInt(a,a*3);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -20,7 +22,7 @@ public class OpenState extends StrategyState {
                 view.invalidate();
             }
         });
-        animator.setDuration(1500);
+        animator.setDuration(1000);
         animator.start();
     }
 

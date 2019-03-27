@@ -22,6 +22,6 @@ public class StrategyAnimationActivity extends ViewBaseActivity {
             public void run() {
                 ((StrategyAnimationView) findViewById(R.id.animation)).overAnimation();
             }
-        },3000);
+        },1800);
     }
 }

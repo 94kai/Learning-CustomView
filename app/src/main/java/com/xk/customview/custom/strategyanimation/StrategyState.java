@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.media.MediaBrowserCompat;
 import android.view.View;
 
 import com.xk.customview.R;
@@ -21,7 +22,7 @@ public abstract class StrategyState {
     private final Paint ballPaint;
     private final Paint bgPaint;
     //画布初始的角度，用来实现旋转效果
-    protected int canvasAngle;
+    protected static int canvasAngle;
     //白色背景的半径
     protected int bgRadius = -1;
 
@@ -64,6 +65,7 @@ public abstract class StrategyState {
     protected void drawBg(Canvas canvas) {
         if (bgRadius >= 0) {
             bgPaint.setStrokeWidth(height);
+            bgPaint.setColor(Color.WHITE);
             bgPaint.setStyle(Paint.Style.STROKE);
             canvas.save();
             canvas.translate(width / 2, height / 2);
