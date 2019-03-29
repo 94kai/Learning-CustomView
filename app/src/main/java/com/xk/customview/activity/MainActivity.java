@@ -56,7 +56,7 @@ public class MainActivity extends ViewBaseActivity {
             public int compare(String o1, String o2) {
                 int o11 = getIndex(o1);
                 int o22 = getIndex(o2);
-                return o11 - o22;
+                return -(o11 - o22);
             }
         });
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, datas));
