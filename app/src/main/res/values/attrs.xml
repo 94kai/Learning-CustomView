@@ -5,4 +5,8 @@
         <attr name="from" format="integer" />
     </declare-styleable>
 
+
+    <declare-styleable name="MCoordinatorLayout">
+        <attr name="behavior" format="string" />
+    </declare-styleable>
 </resources>

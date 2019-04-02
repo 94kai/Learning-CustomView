@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xk.customview.custom.behavior.MCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/image"
+        android:src="@drawable/vae"
+        app:behavior="com.xk.customview.custom.behavior.ImageViewBehavior" />
+</com.xk.customview.custom.behavior.MCoordinatorLayout>

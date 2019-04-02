@@ -32,6 +32,7 @@
         <activity android:name=".activity.HotLabelActivityView"></activity>
         <activity android:name=".activity.StrategyAnimationActivity"></activity>
         <activity android:name=".activity.AnimatorFrameActivity"></activity>
+        <activity android:name=".activity.Behavior1Activity" />
     </application>
 
 </manifest>
