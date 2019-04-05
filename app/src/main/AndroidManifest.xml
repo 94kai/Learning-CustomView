@@ -33,6 +33,7 @@
         <activity android:name=".activity.StrategyAnimationActivity"></activity>
         <activity android:name=".activity.AnimatorFrameActivity"></activity>
         <activity android:name=".activity.Behavior1Activity" />
+        <activity android:name=".activity.MenuAnimatorActivity" />
     </application>
 
 </manifest>
