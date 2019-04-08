@@ -48,6 +48,7 @@ public class MainActivity extends ViewBaseActivity {
         stringClassHashMap.put("16.动画框架", AnimatorFrameActivity.class);
         stringClassHashMap.put("17.behavior", Behavior1Activity.class);
         stringClassHashMap.put("18.侧拉菜单动画", MenuAnimatorActivity.class);
+        stringClassHashMap.put("18.RecyclerView", RecyclerViewActivity.class);
         Set<String> strings = stringClassHashMap.keySet();
 
         for (String string : strings) {
