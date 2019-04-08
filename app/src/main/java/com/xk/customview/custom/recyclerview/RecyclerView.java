@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
+import com.xk.customview.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 大致实现了一个可以向上滚动，回收上面item，添加下面item的功能。不借助scrollBy方法的实现。着重理解原理
  * Created by xuekai on 2019/4/6.
  */
 public class RecyclerView extends ViewGroup {
@@ -116,7 +119,7 @@ public class RecyclerView extends ViewGroup {
         }
         //???为啥要给第一个添加
         viewList.add(view);
-        view.setTag(TAG_TYPE, adapter.getItemType(position));
+        view.setTag(R.id.tag_type, adapter.getItemType(position));
         addView(view);
         return view;
     }
@@ -183,30 +186,60 @@ public class RecyclerView extends ViewGroup {
     @Override
     public void scrollBy(int x, int y) {
         scrollY += y;
-
-
         //添加孩子、删除孩子
         View firstVisiableView = viewList.get(0);
-        if (firstVisiableView.getTop() > adapter.getHeight()) {
-            //这个被划出去了
-            removeTopView(firstVisiableView);
+        if (y > 0) {
+
+            if (-firstVisiableView.getTop() > adapter.getHeight()) {
+                //这个被划出去了
+                removeTopView(firstVisiableView);
+            }
+
+            if (needAddBottom(y)) {
+                addBottomView();
+            }
+
         }
+
+        firstTop = viewList.get(0).getTop() - y;
         reLayoutChild();
+    }
+
+    private void addBottomView() {
+        int lastPosition = firstVisiablePosition + viewList.size();
+        View view = obtainView(lastPosition);
+        //测量孩子。说实话，我们下面layout的时候，位置父亲已经制定好了，不需要测量了。毕竟测量出来的数字也就是为了layout使用。但是最好还是测量一下，毕竟子view自定义控件里面或许自己需要。
+        view.measure(MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(adapter.getHeight(), MeasureSpec.EXACTLY));
+    }
+
+    private boolean needAddBottom(int y) {
+        int firstTop = viewList.get(0).getTop() - y;
+        int height = 0;
+        for (View view : viewList) {
+            height += view.getHeight();
+        }
+        //屏幕展示的内容的高度
+        int showHeight = height - firstTop;
+        return showHeight < getHeight();
     }
 
     private void removeTopView(View view) {
         removeView(view);
         viewList.remove(0);
-        recycler.saveView(view, (Integer) view.getTag(TAG_TYPE));
+        firstVisiablePosition++;
+        recycler.saveView(view, (Integer) view.getTag(R.id.tag_type));
     }
 
+    int firstTop = 0;
+
     private void reLayoutChild() {
-        int top = -scrollY;
+        int top = firstTop;
         for (View view : viewList) {
             view.layout(0, top, width, adapter.getHeight() + top);
             top += adapter.getHeight();
         }
     }
+
 
     @Override
     public void removeView(View view) {
