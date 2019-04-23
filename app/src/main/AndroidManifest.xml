@@ -10,9 +10,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".activity.CircleAndHeartActivityView" />
@@ -34,7 +34,10 @@
         <activity android:name=".activity.AnimatorFrameActivity"></activity>
         <activity android:name=".activity.Behavior1Activity" />
         <activity android:name=".activity.MenuAnimatorActivity" />
-        <activity android:name=".activity.RecyclerViewActivity" >
+        <activity android:name=".activity.RecyclerViewActivity">
+
+        </activity>
+        <activity android:name=".activity.VLayoutActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
