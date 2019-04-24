@@ -50,7 +50,7 @@ public class VLayoutActivity extends Activity {
         //类型为0的就会被缓存起来，最多只能缓存到5条，但是往回滑的时候，需要展示10条，这样还有5条需要重新创建，就很耗时了。
         recycledViewPool.setMaxRecycledViews(0, 10);
         //第二个参数？？？
-        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, true);
+        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager, false);
 
         recyclerView.setAdapter(delegateAdapter);
 
@@ -60,7 +60,7 @@ public class VLayoutActivity extends Activity {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                Button childAt = (Button) ((ViewGroup) holder.itemView).get ChildAt(0);
+                Button childAt = (Button) ((ViewGroup) holder.itemView).getChildAt(0);
                 childAt.setText("banner");
                 Log.i("VLayoutActivity", "onBindViewHolder-->banner1");
 
@@ -71,10 +71,17 @@ public class VLayoutActivity extends Activity {
         BaseDelegateAdapter baseDelegateAdapter = new BaseDelegateAdapter(new GridLayoutHelper(5, 10), 10, R.layout.vlayout_banner, this, ITEM_TYPE_GRID) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
+                Log.i("VLayoutActivity", "onBindViewHolder-->grid1111");
+
                 super.onBindViewHolder(holder, position);
                 Button childAt = (Button) ((ViewGroup) holder.itemView).getChildAt(0);
                 childAt.setText("grid:" + position);
                 Log.i("VLayoutActivity", "onBindViewHolder-->grid");
+            }
+
+            @Override
+            public int getItemViewType(int position) {
+                return position;
             }
         };
         //网格

@@ -1,6 +1,7 @@
 package com.xk.customview.custom.vlayout;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,10 +36,8 @@ public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder>
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == mViewTypeItem) {
-            return new BaseViewHolder(View.inflate(mContext, mLayoutId, null));
-        }
-        return null;
+        Log.i("BaseDelegateAdapter", "onCreateViewHolder-->" + viewType);
+        return new BaseViewHolder(View.inflate(mContext, mLayoutId, null));
     }
 
     @Override
