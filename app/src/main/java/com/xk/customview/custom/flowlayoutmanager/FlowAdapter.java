@@ -21,7 +21,6 @@ public class FlowAdapter<Data> extends BaseAdapter<Data> {
         super(data);
     }
 
-
     @Override
     protected View getViewHolderItemView(@NonNull Context context, int viewType) {
         return new TextView(context);
