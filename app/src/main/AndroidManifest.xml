@@ -37,7 +37,7 @@
         <activity android:name=".activity.RecyclerViewActivity">
 
         </activity>
-        <activity android:name=".activity.VLayoutActivity">
+        <activity android:name=".activity.FlowLayoutManagerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

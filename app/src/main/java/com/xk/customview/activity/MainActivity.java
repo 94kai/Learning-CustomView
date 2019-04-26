@@ -49,7 +49,7 @@ public class MainActivity extends ViewBaseActivity {
         stringClassHashMap.put("17.behavior", Behavior1Activity.class);
         stringClassHashMap.put("18.侧拉菜单动画", MenuAnimatorActivity.class);
         stringClassHashMap.put("19.RecyclerView", RecyclerViewActivity.class);
-        stringClassHashMap.put("20.VLayout", VLayoutActivity.class);
+        stringClassHashMap.put("20.流式布局", FlowLayoutManagerActivity.class);
         Set<String> strings = stringClassHashMap.keySet();
 
         for (String string : strings) {
