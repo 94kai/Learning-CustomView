@@ -3,6 +3,7 @@ package com.xk.customview.custom.flowlayoutmanager;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,11 +24,13 @@ public class FlowAdapter<Data> extends BaseAdapter<Data> {
 
     @Override
     protected View getViewHolderItemView(@NonNull Context context, int viewType) {
+        Log.i("FlowAdapter","getViewHolderItemView-->");
         return new TextView(context);
     }
 
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
+        Log.i("FlowAdapter","onBindViewHolder-->");
         holder.itemView.setBackgroundColor(Color.RED);
         holder.itemView.setPadding(0,0,15,0);
         ((TextView) holder.itemView).setText(data.get(position) + "");

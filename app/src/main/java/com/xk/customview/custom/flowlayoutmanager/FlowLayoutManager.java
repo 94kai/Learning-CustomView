@@ -2,6 +2,7 @@ package com.xk.customview.custom.flowlayoutmanager;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,21 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     SparseArray<Rect> frames = new SparseArray<>();
 
     /**
-     * 定义一个全局的变量，用来存放当前recyclerview滚了多高了
      */
     int scrollY = 0;
+
+
+    //保存所有item偏移量信息
+    //    所有数据高度和
+    private int totalHeight = 0;
+
+    /**
+     * 定义一个全局的变量，用来存放当前recyclerview滚了多高了
+     * 滑动偏移量
+     * 如果是正的就是在向上滑，展现上面的view
+     * 如果是负的向下
+     */
+    private int verticalScrollOffset = 0;
 
     @Override
     public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -38,6 +51,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 //    而使用Remove的方式，是当View不在屏幕中有任何显示的时候，你需要将它Remove掉，以备后面循环利用。可以通过函数removeAndRecycleView()实现。
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        Log.i("FlowLayoutManager","onLayoutChildren-->");
         //如果没有item，直接返回
         if (getItemCount() <= 0) {
             return;
@@ -80,80 +94,67 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             xOffset += decoratedMeasuredWidth;
             lineMaxHeight = Math.max(decoratedMeasuredHeight, lineMaxHeight);
         }
+        totalHeight = yOffset + lineMaxHeight;
 
         //把view进行一个轻量的移除
-        detachAndScrapAttachedViews(recycler);
         fill(recycler, state);
-//        for (int i = 0; i < frames.size(); i++) {
-//            Rect rect = frames.get(i);
-//            layoutDecorated(getChildAt(i), rect.left, rect.top, rect.right, rect.bottom);
-//        }
-
-        // TODO: by xk 2019/4/26 下午12:04 移除屏幕外面的 。
     }
 
     private void fill(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        Log.i("FlowLayoutManager","fill-->");
         //对于不显示的区域的item进行recycle
         //recyclerview显示区域
-        Rect visibleRect = new Rect(0, scrollY, getWidth(), scrollY + getHeight());
+        detachAndScrapAttachedViews(recycler);
 
-        for (int i = 0; i < frames.size(); i++) {
+        Rect visibleRect = new Rect(0, verticalScrollOffset, getWidth(), verticalScrollOffset + getHeight());
+        for (int i = 0; i < getItemCount(); i++) {
+            boolean intersects = Rect.intersects(visibleRect, frames.get(i));
+            View child = getChildAt(i);
+            if (!intersects) {
+//                //这个item不在可见区域内，所以要recycle
+//                // TODO: by xk 2019/4/26 下午3:32 目前发现获取到的孩子是空的，因为上面调用了 detachAndScrapAttachedViews，但是也可能是因为没显示出来过。所以后续确认一下，这里是否有不为空的情况。
+                if (child != null) {
+                    removeAndRecycleView(child, recycler);
+                }else{
+                    Log.i("FlowLayoutManager","fill-->null");
+                }
+            }
+        }
+        for (int i = 0; i < getItemCount(); i++) {
             boolean intersects = Rect.intersects(visibleRect, frames.get(i));
             if (intersects) {
                 //item和可见区域有交集，所以这个item要attach
                 View child = recycler.getViewForPosition(i);
                 Rect rect = frames.get(i);
-
-//                measureChildWithMargins(scrap, 0, 0);
-//                layoutDecorated(scrap,
-//                        frame.left,
-//                        frame.top - verticalScrollOffset,
-//                        frame.right,
-//                        frame.bottom - verticalScrollOffset);
-
-
+                measureChildWithMargins(child, 0, 0);
                 addView(child);
-                layoutDecorated(child, rect.left, rect.top, rect.right, rect.bottom);
-            } else {
-                //这个item不在可见区域内，所以要recycle
-                // TODO: by xk 2019/4/26 下午3:32 目前发现获取到的孩子是空的，因为上面调用了 detachAndScrapAttachedViews，但是也可能是因为没显示出来过。所以后续确认一下，这里是否有不为空的情况。
-                View child = getChildAt(i);
-                if (child != null) {
-                    removeAndRecycleView(child, recycler);
-                }
+                layoutDecorated(child, rect.left, rect.top - verticalScrollOffset, rect.right, rect.bottom - verticalScrollOffset);
             }
         }
 
     }
-    public int totalHeight = 0;
+
 
     @Override
     public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
-        //先detach掉所有的子View
         detachAndScrapAttachedViews(recycler);
-
-        //实际要滑动的距离
-        int travel = dy;
-        int total = 0;
-
-
-        //列表向下滚动dy为正，列表向上滚动dy为负，这点与Android坐标系保持一致。
-        //实际要滑动的距离
-
-        //如果滑动到最顶部
-        if (scrollY + dy < 0) {
-            travel = -scrollY;
-        } else if (scrollY + dy > 100000 - getHeight()) {//如果滑动到最底部
-            travel = total - getHeight() - scrollY;
+        //实际滑动距离  dx
+        int trval = dy;
+//        如果滑动到最顶部  往下滑   verticalScrollOffset   -
+//        第一个坐标值 减 以前最后一个坐标值  //记死
+        if (verticalScrollOffset + dy < 0) {
+            trval = -verticalScrollOffset;
+        } else if (verticalScrollOffset + dy > totalHeight - getHeight()) {
+//            如果滑动到最底部  往上滑   verticalScrollOffset   +
+            trval = totalHeight - getHeight() - verticalScrollOffset;
         }
+//        边界值判断
+        verticalScrollOffset += trval;
 
-        //将竖直方向的偏移量+travel
-        scrollY += travel;
-
-        // 调用该方法通知view在y方向上移动指定距离
-        offsetChildrenVertical(-travel);
-
-        return travel;
+        //平移容器内的item
+        offsetChildrenVertical(trval);
+        fill(recycler, state);
+        return trval;
     }
 
     @Override

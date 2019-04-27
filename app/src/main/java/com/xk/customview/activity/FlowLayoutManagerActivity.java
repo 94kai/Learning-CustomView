@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.xk.customview.R;
 import com.xk.customview.custom.flowlayoutmanager.FlowAdapter;
@@ -43,5 +44,16 @@ public class FlowLayoutManagerActivity extends Activity {
             data.add(stringBuffer.toString());
         }
         recyclerView.setAdapter(new FlowAdapter<>(data));
+        RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
+        //由于流失布局不规整，所以这里一定要设置缓冲池的大小，否则默认的不够用，经常会导致一直创建。
+        recycledViewPool.setMaxRecycledViews(0,10);
+        recyclerView.setRecycledViewPool(recycledViewPool);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Log.i("FlowLayoutManagerActivity","onScrolled-->"+recyclerView.getChildCount());
+            }
+        });
     }
 }
