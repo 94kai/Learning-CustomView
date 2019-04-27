@@ -113,7 +113,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
             if (!intersects) {
 //                //这个item不在可见区域内，所以要recycle
 //                // TODO: by xk 2019/4/26 下午3:32 目前发现获取到的孩子是空的，因为上面调用了 detachAndScrapAttachedViews，但是也可能是因为没显示出来过。所以后续确认一下，这里是否有不为空的情况。
-                if (child != null) {
+                if (child != null) {//事实证明，detach之后是get不到childview的
                     removeAndRecycleView(child, recycler);
                 }else{
                     Log.i("FlowLayoutManager","fill-->null");
